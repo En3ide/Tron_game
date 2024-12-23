@@ -1,0 +1,27 @@
+# Variables
+CC = gcc
+CFLAGS = -I/usr/include/SDL2 -Wall
+LDFLAGS = -L/usr/lib -lSDL2main -lSDL2 -lSDL2_image
+TARGET = tron_game
+
+SRC_DIR = ./src
+OBJ_DIR = ./obj
+
+SRCS = $(SRC_DIR)/main.c $(SRC_DIR)/model/model.c $(SRC_DIR)/VueSDL/VueSDL.c
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+# Compilation par défaut
+all: $(TARGET)
+
+# Règle pour construire l'exécutable
+$(TARGET): $(OBJS)
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+# Règle pour compiler chaque fichier source en fichier objet
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Nettoyage des fichiers générés
+clean:
+	rm -rf $(OBJ_DIR) $(TARGET)
