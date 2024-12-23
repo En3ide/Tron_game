@@ -141,9 +141,7 @@ void Menu(Game *game)
     // Afficher la texture à l'écran
     SDL_RenderCopy(game->renderer, textTexture, NULL, &textRect);
     // SDL_DestroyTexture(textTexture); // Libérer la texture après l'affichage
-
     SDL_RenderPresent(game->renderer);
-    press_wait();
 }
 
 // Fonction de rendu des joueurs
@@ -213,9 +211,7 @@ int Vue_SDL_tron()
         SDL_Quit();
         return 1;
     }
-
-    // Menu(game);
-    //  Grille et joueurs
+    //   Grille et joueurs
     game->grid = malloc(WINDOW_HEIGHT / GRID_SIZE * WINDOW_WIDTH / GRID_SIZE * sizeof(int));
     game->player1 = new (Player);
     game->player2 = new (Player);
@@ -226,6 +222,8 @@ int Vue_SDL_tron()
     bool pause = false;
     SDL_Event event;
 
+    Menu(game);
+    press_wait();
     // Boucle de jeu
     while (running)
     {
