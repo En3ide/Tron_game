@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 
+#define new(type) ((type *)malloc(sizeof(type)))
+
 // definie les taille de l'interface et de la fenetre
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -39,6 +41,6 @@ void move_player(Player *p);
  * @param grid Grille de jeu contenant les obstacles
  * @return true si une collision est détectée, false sinon
  */
-bool check_collision(Player *p, int grid[WINDOW_HEIGHT / GRID_SIZE][WINDOW_WIDTH / GRID_SIZE]);
+bool check_collision(Player *p, int *grid);
 
 #endif // MODEL_H

@@ -29,15 +29,23 @@
 #define DARK_WHITE (SDL_Color){192, 192, 192, 255};
 #define DARK_BLACK (SDL_Color){32, 32, 32, 255};
 
-typedef struct Game
+typedef struct _Game
 {
     SDL_Window *window;
     SDL_Renderer *renderer;
     TTF_Font *font;
     SDL_Surface *textSurface;
-    SDL_Color Color_Menu;
-    SDL_Color Color_Game_Over;
+    SDL_Color color_Menu;
+    SDL_Color color_Game_Over;
+    Player *player1;
+    SDL_Color color_p1;
+    Player *player2;
+    SDL_Color color_p2;
+    int *grid;
 } Game;
+
+void press_wait();
+void GameOver(Game *game);
 
 /**
  * @brief Fait le rendu de la grille
@@ -45,7 +53,7 @@ typedef struct Game
  * @param renderer Pointeur vers le rendu
  * @param grid Pointeur vers la Grille de jeu
  */
-void render_grid(SDL_Renderer *renderer, int grid[WINDOW_HEIGHT / GRID_SIZE][WINDOW_WIDTH / GRID_SIZE]);
+void render_grid(Game *game);
 
 /**
  * @brief Genere le rendu des joueurs
@@ -54,7 +62,7 @@ void render_grid(SDL_Renderer *renderer, int grid[WINDOW_HEIGHT / GRID_SIZE][WIN
  * @param player1  Pointeur sur la structur du joueur 1
  * @param player2  Pointeur sur la structur du joueur 1
  */
-void render_players(SDL_Renderer *renderer, Player *player1, Player *player2);
+void render_players(Game *game);
 
 /**
  * @brief Boucle principale de la version SDL du jeu Tron
